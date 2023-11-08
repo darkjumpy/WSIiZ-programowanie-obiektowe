@@ -14,15 +14,24 @@ namespace Lab1.Constructions
             Width = width;
             Entrances = entrances;
             HumanCapacity = humanCapacity;
-            BuildMaterial = buildMaterial;
+            _buildMaterial = buildMaterial;
         }
 
+        private string _buildMaterial { get; set; }
         public float Height { get; set; }
         public float Width { get; set; }
         public int Entrances { get; set; }
         public int HumanCapacity { get; set; }
-        public string BuildMaterial { get; set; }
-
-
+        public string BuildMaterial
+        {
+            get
+            {
+                return _buildMaterial;
+            }
+            set
+            {
+                _buildMaterial = value;
+            }
+        }
     }
 }

@@ -7,7 +7,9 @@ namespace Lab1
     {
         static void Main(string[] args)
         {
-            var constr = new Construction(66, 66, 66, 66, "test");
+            var constr = new Construction(32, 23, 3, 6, "brik");
+            constr.BuildMaterial = "eee";
+            Console.WriteLine(constr.BuildMaterial);
         }
     }
 }
