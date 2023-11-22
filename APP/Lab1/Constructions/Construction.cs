@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lab1.Abstract;
 using Lab1.Constructions.Models;
 using Lab1.Interfaces;
+using Lab1.Materials;
 
 namespace Lab1.Constructions
 {
@@ -42,6 +44,32 @@ namespace Lab1.Constructions
         public float Width { get; set; }
         public int Entrances { get; set; }
         public int HumanCapacity { get; set; }
+        private AbstractMaterial? _material { get; set; }
+
+        private void InitializeMaterial()
+        {
+            switch (_buildMaterial)
+            {
+                case TypeOfMaterial.Brick:
+                    _material = new BrickMaterial();
+                    break;
+                case TypeOfMaterial.Concrete:
+                    _material = new ConcreteMaterial();
+                    break;
+                case TypeOfMaterial.Wood:
+                    _material = new WoodMaterial();
+                    break;
+                default:
+                    _material = new BrickMaterial();
+                    break;
+            }
+        }
+
+        public double GetSquareCost()
+        {
+            InitializeMaterial();
+            return Width * Height * 0.9 * _material.CalculateMaterialCost();
+        }
         public TypeOfMaterial BuildMaterial
         {
             get
@@ -59,22 +87,6 @@ namespace Lab1.Constructions
             double squareArea = Height * Width;
             double costPerSquareUnit = 10.0; 
             return squareArea * costPerSquareUnit;
-        }
-        public double GetSquareCost()
-        {
-            if (BuildMaterial == TypeOfMaterial.Brick)
-            {
-                return Width * Height * 0.9 * 0.8;
-            }
-            else if (BuildMaterial == TypeOfMaterial.Concrete)
-            {
-                return Width * Height * 0.9 * 0.87;
-            }
-            else if (BuildMaterial == TypeOfMaterial.Wood)
-            {
-                return Width * Height * 0.9 * 0.78;
-            }
-            return 0;
         }
 
         public void DisplayCostDetails()
