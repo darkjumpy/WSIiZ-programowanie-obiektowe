@@ -33,7 +33,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public IActionResult Prod(int number1, int number2)
         {
-            return Ok(number1*number2);
+            return Ok(number1/number2);
         }
 
         [HttpPost]
